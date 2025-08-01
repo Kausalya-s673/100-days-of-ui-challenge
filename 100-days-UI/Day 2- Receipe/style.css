@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: #edebeb;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container {
+  display: flex;
+  position: relative;
+  width: 320px;
+  height: 580px;
+}
+
+.card-border{
+  width: 320px;
+  height: 580px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1e1b1b;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.card.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.glass-card {
+  padding-left: 10px;
+    padding-top: 10px;
+    
+    border-radius: 30px;
+  width: 300px;
+  height: 560px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+
+.card-image {
+  background: url('./Asset/Paniyaram Recipes.jpg') center/cover no-repeat;
+  position: absolute;
+  border-radius:30px;
+  width: 100%;
+  height: 100%;
+
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  color: #fff;
+  border-radius: 20px;
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.card-overlay h2 {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.card-overlay p,
+.card-overlay ul,
+.card-overlay ol {
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.card-overlay ul,
+.card-overlay ol {
+  padding-left: 18px;
+}
+
+.card-overlay li {
+  margin-bottom: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.Start {
+  padding: 10px 24px;
+  border: 1px solid white;
+  border-radius: 25px;
+  background: transparent;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.Start:hover {
+  border-color: #00ff90;
+  color: #00ff90;
+}

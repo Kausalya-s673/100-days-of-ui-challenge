@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sliding Auth Page</title>
+  <style>
+    * {
+  box-sizing: border-box;
+}
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      position: relative;
+      width: 800px;
+      height: 550px;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      display: flex;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .panel {
+      flex: 1;
+      padding: 40px;
+      transition: transform 0.6s ease;
+    }
+    .form-panel {
+      background: #fff;
+      z-index: 2;
+        display: flex;
+  flex-direction: column;
+  justify-content: center;
+    height: 100%;
+    }
+    .image-panel {
+      background: #e8f5e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    .image-panel img {
+      max-width: 80%;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  button {
+
+  width: 100%;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+    .toggle-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .toggle-link a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .toggle-link a:hover {
+      text-decoration: underline;
+    }
+    .or-separator {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 14px;
+      color: #888;
+    }
+    .social-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .social-buttons button {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 5px;
+      color: #888;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .social-buttons img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Sliding effect */
+    .container.login-active .form-panel {
+      transform: translateX(100%);
+    }
+    .container.login-active .image-panel {
+      transform: translateX(-100%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="panel form-panel" id="formPanel">
+    <h2 id="formTitle">Create Account</h2>
+    <div id="formFields">
+      <input type="text" placeholder="Name">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button>Sign Up</button>
+      <div class="or-separator">-- or --</div>
+      <div class="social-buttons">
+        <button><img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google"> Google</button>
+        <button><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"> Facebook</button>
+      </div>
+    </div>
+    <div class="toggle-link" id="toggleContainer">
+      Already have an account? <a href="#" id="toggleLink">Login</a>
+    </div>
+  </div>
+  <div class="panel image-panel">
+    <img src="./Asset/ai-generated-8807378_640.png" alt="Green Illustration">
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById('container');
+  const toggleContainer = document.getElementById('toggleContainer');
+  const formTitle = document.getElementById('formTitle');
+  const formFields = document.getElementById('formFields');
+
+  let isLogin = false;
+
+  toggleContainer.addEventListener('click', function(event) {
+    if (event.target && event.target.id === 'toggleLink') {
+      event.preventDefault();
+      isLogin = !isLogin;
+      container.classList.toggle('login-active');
+
+      if (isLogin) {
+        formTitle.textContent = 'Login';
+        formFields.innerHTML = `
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button>Login</button>
+          <div class="or-separator">-- or --</div>
+          <div class="social-buttons">
+            <button><img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google"> Google</button>
+            <button><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"> Facebook</button>
+          </div>
+        `;
+        toggleContainer.innerHTML = `Don't have an account? <a href="#" id="toggleLink">Sign up</a>`;
+      } else {
+        formTitle.textContent = 'Create Account';
+        formFields.innerHTML = `
+          <input type="text" placeholder="Name">
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button>Sign Up</button>
+          <div class="or-separator">-- or --</div>
+          <div class="social-buttons">
+            <button><img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google"> Google</button>
+            <button><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"> Facebook</button>
+          </div>
+        `;
+        toggleContainer.innerHTML = `Already have an account? <a href="#" id="toggleLink">Login</a>`;
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
+
