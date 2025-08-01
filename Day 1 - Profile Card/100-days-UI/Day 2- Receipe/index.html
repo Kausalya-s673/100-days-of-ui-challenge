@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Card</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <div class="card-container">
+    <!-- Page 1 -->
+    <div class="card-border card active">
+      <div class="glass-card">
+        <div class="card-image"></div>
+        <div class="card-overlay">
+          <h2>Kuzhi Paniyaram</h2>
+          <p>The sun peeks through your kitchen window. You're craving something warm, crispy outside and soft inside..
+            <br>It’s time to make Kuzhi Paniyaram.
+            <br>Grab your apron.
+            <br>Click Start to begin your cooking story.
+          </p>
+          <p style="font-size: 10px; text-align: center;">@Alya_123</p>
+          <div class="buttons">
+            <button class="Start" onclick="showCard(1)">Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="card-border card">
+      <div class="glass-card">
+        <div class="card-image"></div>
+        <div class="card-overlay">
+          <h2>Gathering the Magic Ingredients</h2>
+          <ul>
+            <li>2 cups of idli/dosa batter – thick and slightly fermented</li>
+            <li>1 tsp mustard seeds</li>
+            <li>1 tsp urad dal</li>
+            <li>½ cup finely chopped onion</li>
+            <li>2 green chilies</li>
+            <li>1 tsp grated ginger</li>
+            <li>Curry leaves</li>
+            <li>¼ cup grated carrot</li>
+            <li>2 tbsp chopped coriander</li>
+            <li>Salt, to taste</li>
+            <li>Oil</li>
+          </ul>
+          <div class="buttons">
+            <button class="Start" onclick="showCard(2)">Let's Cook!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="card-border card">
+      <div class="glass-card">
+        <div class="card-image"></div>
+        <div class="card-overlay">
+          <h2>How to Make Kuzhi Paniyaram</h2>
+          <p>Follow these easy steps:</p>
+          <p>
+          <ol style="font-size: 12px;">
+            <li>Heat oil in a pan, add mustard seeds, urad dal, curry leaves.</li>
+            <li>Add chopped onions, green chilies, and grated ginger. Sauté till soft.</li>
+            <li>Add grated carrot, cook slightly. Turn off heat and mix into the batter.</li>
+            <li>Grease the paniyaram pan with little oil.Pour the batter into each mould.</li>
+            <li>Pour the batter into each mould.</li>
+            <li>Cover and cook on medium flame for 3–4 mins.</li>
+            <li>Flip each paniyaram and cook until golden.</li>
+            <li>Finally Serve hot with chutney or sambar.</li>
+          </ol>
+          </p>
+          <div class="buttons">
+            <button class="Start">Finish Cooking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
