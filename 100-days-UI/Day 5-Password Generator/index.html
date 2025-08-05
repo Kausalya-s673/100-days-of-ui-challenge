@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      border-radius: 16px;
+      padding: 30px;
+      width: 350px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .output {
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .output span {
+      font-size: 16px;
+      word-break: break-all;
+    }
+
+    .output-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .output-buttons button {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .slider-container {
+      margin-bottom: 20px;
+    }
+
+    .slider-container label,
+    .settings label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .length-value {
+      font-weight: bold;
+      float: right;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .settings {
+      margin-bottom: 20px;
+    }
+
+    .toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2a2a2a;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 20px;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #9b5de5;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(16px);
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #9b5de5;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .generate-btn:hover {
+      background-color: #7c3aed;
+    }
+
+    .light-mode {
+      background-color: #f4f4f4;
+      color: #111;
+    }
+
+    .light-mode .container {
+      background-color: #fff;
+      color: #111;
+    }
+
+    .light-mode .output,
+    .light-mode .toggle {
+      background-color: #f0f0f0;
+    }
+  </style>
+   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <div class="container">
+    <button class="theme-toggle" id="themeToggle">🌓</button>
+    <h2>Generate password</h2>
+    <div class="output">
+      <span id="passwordDisplay">sZBseL181NEj</span>
+      <div class="output-buttons">
+        <button id="copyBtn" onclick="copyPassword()"><i class="ph ph-copy"></i></button>
+        <button id="refreshBtn">🔄</button>
+      </div>
+    </div>
+
+    <div class="strength" id="strengthText" style="color: #ccc;">Strength: </div>
+<br/>
+<hr/>
+<br/>
+    <div class="slider-container">
+      <label style="color: #ccc;">Character Length: <span id="lengthValue">12</span></label>
+      <input type="range" id="lengthSlider" min="12" max="32" value="12" />
+    </div>
+<hr/>
+<br/>
+<label for="Settings" style="color: #ccc;">Settings: </label>
+    <div class="settings">
+      <div class="toggle">
+        <span>Include uppercase letters</span>
+        <label class="switch">
+          <input type="checkbox" id="uppercase" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle">
+        <span>Include lowercase letters</span>
+        <label class="switch">
+          <input type="checkbox" id="lowercase" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle">
+        <span>Include numbers</span>
+        <label class="switch">
+          <input type="checkbox" id="numbers" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle">
+        <span>Include symbols</span>
+        <label class="switch">
+          <input type="checkbox" id="symbols">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generateBtn">Generate Password</button>
+  </div>
+
+  <script>
+    const passwordDisplay = document.getElementById('passwordDisplay');
+    const lengthSlider = document.getElementById('lengthSlider');
+    const lengthValue = document.getElementById('lengthValue');
+    const copyBtn = document.getElementById('copyBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const generateBtn = document.getElementById('generateBtn');
+    const themeToggle = document.getElementById('themeToggle');
+
+    const uppercase = document.getElementById('uppercase');
+    const lowercase = document.getElementById('lowercase');
+    const numbers = document.getElementById('numbers');
+    const symbols = document.getElementById('symbols');
+
+    const similarChars = /[0OIl1]/g;
+function generatePassword() {
+  const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+  const lower = "abcdefghijkmnopqrstuvwxyz";
+  const num = "23456789";
+  const sym = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+  let charset = "";
+  if (uppercase.checked) charset += upper;
+  if (lowercase.checked) charset += lower;
+  if (numbers.checked) charset += num;
+  if (symbols.checked) charset += sym;
+
+  let password = "";
+  const len = +lengthSlider.value;
+
+  if (!charset.length) return;
+
+  for (let i = 0; i < len; i++) {
+    const char = charset.charAt(Math.floor(Math.random() * charset.length));
+    password += char;
+  }
+
+  password = password.replace(similarChars, () => {
+    return charset.charAt(Math.floor(Math.random() * charset.length));
+  });
+
+  passwordDisplay.textContent = password;
+
+  // 👇 Evaluate strength here
+  evaluateStrength(password);
+}
+
+
+    lengthSlider.addEventListener('input', () => {
+      lengthValue.textContent = lengthSlider.value;
+    });
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(passwordDisplay.textContent).then(() => {
+        alert("Password copied to clipboard!");
+      });
+    });
+
+    refreshBtn.addEventListener('click', generatePassword);
+    generateBtn.addEventListener('click', generatePassword);
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+    });
+
+    generatePassword();
+    function copyPassword() {
+  navigator.clipboard.writeText(result.value).then(() => {
+    alert("Password copied!");
+  });
+  
+}
+function evaluateStrength(password) {
+  const length = password.length;
+  let score = 0;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  let strength = "Weak";
+  if (score >= 3 && length >= 10) strength = "Strong";
+  else if (score >= 2 && length >= 8) strength = "Medium";
+
+  strengthText.textContent = `Strength: ${strength}`;
+}
+
+  </script>
+</body>
+</html>
